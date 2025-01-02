@@ -5,18 +5,21 @@ function sortear() {
 
     let sorteados = [];
     let numero;
+    let resposta = validarNum(inicio, fim);
 
-    for (let i = 0; i < qtde; i++){
-        numero = gerarNum(inicio, fim);
-        while (sorteados.includes(numero) == true) {
+    if (resposta == 1){
+        for (let i = 0; i < qtde; i++){
             numero = gerarNum(inicio, fim);
-        }
-        sorteados.push(numero);
-    };
-
-    let resultado = document.getElementById('resultado');
-    resultado.innerHTML = `<label class="texto__paragrafo">Números sorteados: ${sorteados}</label>`;
-    alterarStatusBotao();
+            while (sorteados.includes(numero) == true) {
+                numero = gerarNum(inicio, fim);
+            }
+            sorteados.push(numero);
+        };
+    
+        let resultado = document.getElementById('resultado');
+        resultado.innerHTML = `<label class="texto__paragrafo">Números sorteados: ${sorteados}</label>`;
+        alterarStatusBotao();
+    }
 };
 
 function gerarNum(min, max) {
@@ -41,4 +44,14 @@ function reiniciar() {
     document.getElementById('ate').value = '';
     document.getElementById('resultado').innerHTML = '<label class="texto__paragrafo">Números sorteados:  nenhum até agora</label>';
     alterarStatusBotao();
+};
+
+function validarNum(de, ate) {
+    if (de > ate){
+        alert('Insira um valor inicial em "Do número" menor que o valor final em "Até o número"!');
+        document.getElementById('de').value = '';
+        return 0;
+    }else{
+        return 1;
+    };
 };
